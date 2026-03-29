@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tej Events Pune | Best Events Equipment Rental Services</title>
+  <meta name="description"
+    content="Tej Events Pune is specialized in providing event-related equipment on a rental basis. Make your event spectacular with our top-notch equipment rental services!">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- React and ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel Standalone for inline JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const Navbar = ({ currentPath, setPath }) => {
+      const [isOpen, setIsOpen] = useState(false);
+
+      const navLinks = [
+        { path: '', label: 'Home' },
+        { path: 'about', label: 'About Us' },
+        { path: 'services', label: 'Services' },
+        { path: 'contact', label: 'Contact Us' }
+      ];
+
+      return (
+        <nav className="glass-nav">
+          <div className="container navbar-content">
+            <a href="#" className="logo-container" onClick={(e) => { e.preventDefault(); setPath(''); }}>
+              <img src="Tej_Events%20Logo.jpg" alt="Tej Events Pune Logo" className="logo-img" onError={(e) => { e.target.style.display = 'none'; }} />
+              <span className="logo-text">TEJ EVENTS</span>
+            </a>
+
+            <ul className={`nav-links ${isOpen ? 'mobile-active' : ''}`}>
+              {navLinks.map(link => (
+                <li key={link.path}>
+                  <a
+                    href={`#${link.path}`}
+                    className={currentPath === link.path ? 'active' : ''}
+                    onClick={() => { setPath(link.path); setIsOpen(false); }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mobile-menu-icon" onClick={() => setIsOpen(!isOpen)}>
+              <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+            </div>
+          </div>
+        </nav>
+      );
+    };
+
+    const PastEvents = () => {
+      const events = [
+        { title: "VJ parivaar carnival", category: "Corporate Event", img: "Photos/VJ.webp" },
+        { title: "splash.n.play", category: "Kids Event", img: "Photos/Splash n Play.jpg" },
+        { title: "Flea market", category: "Shoping Food and Music events", img: "Photos/Flea markets.webp" },
+        { title: "UBS Run", category: "Corporate Ground Event", img: "Photos/UBS.jpg" },
+      ];
+
+      return (
+        <section className="section container">
+          <h2 className="section-title">Our Past <span>Events</span></h2>
+          <div className="portfolio-grid">
+            {events.map((evt, idx) => (
+              <div key={idx} className="portfolio-card glass">
+                <div className={evt.img ? "portfolio-img-container" : "portfolio-img-placeholder"}>
+                  {evt.img ? (
+                    <img src={evt.img} alt={evt.title} className="portfolio-img" />
+                  ) : (
+                    <i className="fas fa-camera"></i>
+                  )}
+                </div>
+                <div className="portfolio-info">
+                  <h3>{evt.title}</h3>
+                  <p>{evt.category}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+            <a href="https://www.instagram.com/tejeventspune/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+              <i className="fab fa-instagram" style={{ fontSize: '1.2rem' }}></i> View more on our Instagram
+            </a>
+          </div>
+        </section>
+      );
+    };
+
+    const Testimonials = () => {
+      const reviews = [
+        { name: "Rahul S.", text: "Tej Events made our corporate offsite a massive success. The A/V equipment was flawless!" },
+        { name: "Sneha M.", text: "Tejaswini and her team were incredible for our wedding. The decor and lighting were breathtaking, making it a perfect day." },
+        { name: "Amit K.", text: "Highly recommend for any sound or staging rentals. Extremely professional and very reasonably priced." }
+      ];
+
+      return (
+        <section className="section container" style={{ paddingBottom: '100px' }}>
+          <h2 className="section-title">Client <span>Testimonials</span></h2>
+          <div className="testimonial-grid">
+            {reviews.map((rev, idx) => (
+              <div key={idx} className="testimonial-card glass">
+                <div className="quote-icon"><i className="fas fa-quote-left"></i></div>
+                <p className="review-text">"{rev.text}"</p>
+                <h4 className="reviewer-name">- {rev.name}</h4>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    };
+
+    const Home = ({ setPath }) => (
+      <div className="animate-fade-in content-area">
+        <section className="hero">
+          {/* Background Video: please place 'flea_market_video.mp4' in the same folder */}
+          <video autoPlay loop muted playsInline className="hero-video">
+            <source src="flea_market_video.mp4" type="video/mp4" />
+          </video>
+          <div className="hero-overlay"></div>
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            <h1>Make Your Events <span>Spectacular</span></h1>
+            <p>Welcome to Tej Events Pune. We specialize in organizing corporate events, Flea Markets, and providing the best event-related equipment on a rental basis.</p>
+            <div style={{ marginTop: '2rem' }}>
+              <a href="#services" className="btn btn-primary" onClick={() => setPath('services')}>View Services</a>
+              <a href="#contact" className="btn btn-outline" onClick={() => setPath('contact')}>Get a Quote</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="section container">
+          <h2 className="section-title">Why Choose <span>Us?</span></h2>
+          <div className="grid">
+            <div className="card glass">
+              <i className="fas fa-gem"></i>
+              <h3>Premium Quality</h3>
+              <p>We provide up-to-date, trendy, and high-quality equipment to ensure your event looks absolutely brilliant.</p>
+            </div>
+            <div className="card glass">
+              <i className="fas fa-hand-holding-usd"></i>
+              <h3>Affordable Cost</h3>
+              <p>Our rental charges are designed to fit your budget, offering a wide range of products at different price points.</p>
+            </div>
+            <div className="card glass">
+              <i className="fas fa-cogs"></i>
+              <h3>Full-Service</h3>
+              <p>From live performances to stage setups and technology, we handle everything from conception to completion.</p>
+            </div>
+          </div>
+        </section>
+
+        <PastEvents />
+        <Testimonials />
+      </div>
+    );
+
+    const About = () => (
+      <div className="animate-fade-in content-area" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+        <div className="container about-content">
+          <div className="about-image glass">
+            <div className="about-img-placeholder">
+              <i className="fas fa-users"></i>
+            </div>
+          </div>
+          <div className="about-text">
+            <h2>About <span>Tej Events Pune</span></h2>
+            <p>Tej Events is a premier event management company in Pune having expertise in organizing corporate events, live performances, Flea Markets, and special events. Our key responsibilities are right from conception to completion.</p>
+            <p>As the "Best Events Equipment Rental Services in Pune", we specialize in the business of providing event-related equipment on a rental basis. Make sure your event has all the essential items to make it successful. Put your faith in Tej Events to provide you with necessary and up-to-date equipment.</p>
+
+            <div className="about-features">
+              <div className="feature-item">
+                <i className="fas fa-check-circle"></i> Corporate Events
+              </div>
+              <div className="feature-item">
+                <i className="fas fa-check-circle"></i> Destination Weddings
+              </div>
+              <div className="feature-item">
+                <i className="fas fa-check-circle"></i> Live Performances
+              </div>
+              <div className="feature-item">
+                <i className="fas fa-check-circle"></i> Equipment Rental
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    const Services = () => {
+      const servicesContent = [
+        { icon: "fas fa-video", title: "Audio-Visual Equipment", desc: "HD projectors, screens, TVs, and Laptops for perfect presentations." },
+        { icon: "fas fa-couch", title: "Furniture Rentals", desc: "Chairs, sofas, benches, round, and rectangular tables in various styles." },
+        { icon: "fas fa-utensils", title: "Catering Equipment", desc: "Chafing dishes, serving trays, utensils, and complete buffet setups." },
+        { icon: "fas fa-magic", title: "Staging & Decor", desc: "Modular staging systems, portable dance floors, and event decor." },
+        { icon: "fas fa-lightbulb", title: "Lighting & Truss", desc: "LED lights, stage lighting, ambient lighting solutions, and Box Truss." },
+        { icon: "fas fa-volume-up", title: "Sound Systems", desc: "High-fidelity speakers, microphones, cordless mics, and mixers." }
+      ];
+
+      return (
+        <div className="animate-fade-in content-area" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+          <div className="container">
+            <h2 className="section-title">Our <span>Services & Offerings</span></h2>
+            <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: '800px', margin: '0 auto 3rem' }}>
+              Our event equipment rental services are designed to provide you with everything you need for a successful and memorable event. We offer a wide range of high-quality equipment.
+            </p>
+            <div className="grid">
+              {servicesContent.map((srv, idx) => (
+                <div key={idx} className="card glass">
+                  <i className={srv.icon}></i>
+                  <h3>{srv.title}</h3>
+                  <p>{srv.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const Contact = () => (
+      <div className="animate-fade-in content-area" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+        <div className="container">
+          <h2 className="section-title">Get in <span>Touch</span></h2>
+          <div className="contact-grid">
+            <div className="contact-info glass" style={{ padding: '2rem' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Contact Information</h3>
+
+              <div className="contact-item">
+                <i className="fas fa-user-circle"></i>
+                <div>
+                  <h4>Contact Person</h4>
+                  <p>Tejaswini (Pune, Maharashtra)</p>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <i className="fas fa-phone-alt"></i>
+                <div>
+                  <h4>Phone</h4>
+                  <a href="tel:+917768809555">+91 7768809555</a>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <i className="fab fa-whatsapp"></i>
+                <div>
+                  <h4>WhatsApp</h4>
+                  <a href="https://wa.me/917768809555" target="_blank" rel="noopener noreferrer">Message Tejaswini on WhatsApp</a>
+                </div>
+              </div>
+
+              <div className="contact-item">
+                <i className="fas fa-envelope"></i>
+                <div>
+                  <h4>Email</h4>
+                  <a href="mailto:info@tejeventspune.com">info@tejeventspune.com</a>
+                </div>
+              </div>
+
+              <div style={{ marginTop: '2rem' }}>
+                <h4 style={{ marginBottom: '1rem' }}>Follow Us</h4>
+                <div className="social-links">
+                  <a href="https://www.instagram.com/tejeventspune/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                  <a href="#" target="_blank" rel="noopener noreferrer" title="Facebook">
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                  <a href="https://www.google.com/search?q=Tej+Events+Pune" target="_blank" rel="noopener noreferrer" title="Google Search">
+                    <i className="fab fa-google"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="contact-form glass" style={{ padding: '2rem' }}>
+              <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Send Tejaswini a Message</h3>
+              <form onSubmit={(e) => { e.preventDefault(); alert('Thank you for getting in touch! Tejaswini will get back to you soon.'); }}>
+                <div className="form-group" style={{ marginBottom: '1rem' }}>
+                  <input type="text" placeholder="Your Name" required />
+                </div>
+                <div className="form-group" style={{ marginBottom: '1rem' }}>
+                  <input type="email" placeholder="Your Email" required />
+                </div>
+                <div className="form-group" style={{ marginBottom: '1rem' }}>
+                  <input type="text" placeholder="Event Type (e.g., Wedding, Corporate)" required />
+                </div>
+                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
+                  <textarea placeholder="Tell us about your requirements..." required></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>Send Message</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+    const App = () => {
+      const [currentPath, setCurrentPath] = useState('');
+
+      useEffect(() => {
+        const handleHashChange = () => {
+          const hash = window.location.hash.replace('#', '');
+          setCurrentPath(hash);
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        handleHashChange();
+
+        return () => window.removeEventListener('hashchange', handleHashChange);
+      }, []);
+
+      const renderPage = () => {
+        switch (currentPath) {
+          case 'about': return <About />;
+          case 'services': return <Services />;
+          case 'contact': return <Contact />;
+          default: return <Home setPath={(path) => { window.location.hash = path; window.scrollTo(0, 0); }} />;
+        }
+      };
+
+      return (
+        <React.Fragment>
+          <Navbar currentPath={currentPath} setPath={(path) => { window.location.hash = path; window.scrollTo(0, 0); }} />
+          <main style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+            {renderPage()}
+          </main>
+          <footer>
+            <div className="container">
+              <p>&copy; {new Date().getFullYear()} Tej Events Pune (Tejaswini). All Rights Reserved.</p>
+              <div className="social-links" style={{ justifyContent: 'center', marginTop: '1.5rem' }}>
+                <a href="https://www.instagram.com/tejeventspune/" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+          </footer>
+        </React.Fragment>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+
+</html>
