@@ -27,6 +27,7 @@
       const navLinks = [
         { path: '', label: 'Home' },
         { path: 'about', label: 'About Us' },
+        { path: 'upcoming events', label: 'Upcoming Events' },
         { path: 'services', label: 'Services' },
         { path: 'contact', label: 'Contact Us' }
       ];
@@ -162,6 +163,24 @@
 
         <PastEvents />
         <Testimonials />
+      </div>
+    );
+
+    const UpcomingEvents = () => (
+      <div className="animate-fade-in content-area" style={{ paddingTop: '120px', paddingBottom: '80px' }}>
+        <div className="container">
+          <h2 className="section-title">Upcoming <span>Events</span></h2>
+          <div className="glass" style={{ padding: '3rem', textAlign: 'center' }}>
+            <i className="fas fa-calendar-alt" style={{ fontSize: '4rem', color: 'var(--primary)', marginBottom: '1.5rem' }}></i>
+            <h3>Exciting Things are Coming Soon!</h3>
+            <p style={{ color: 'var(--text-muted)', maxWidth: '600px', margin: '1rem auto' }}>
+              We are currently planning some spectacular events in Pune. Stay tuned to this page or follow us on Instagram for the latest updates and announcements!
+            </p>
+            <a href="https://www.instagram.com/tejeventspune/" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ marginTop: '2rem' }}>
+              Follow for Updates
+            </a>
+          </div>
+        </div>
       </div>
     );
 
@@ -325,6 +344,7 @@
       const renderPage = () => {
         switch (currentPath) {
           case 'about': return <About />;
+          case 'upcoming': return <UpcomingEvents />;
           case 'services': return <Services />;
           case 'contact': return <Contact />;
           default: return <Home setPath={(path) => { window.location.hash = path; window.scrollTo(0, 0); }} />;
